@@ -8,22 +8,15 @@
           <el-button>Sign Up</el-button>
         </div>
       </div>
-      <header-title :titleContent="title"></header-title>
     </div>
     <router-view/>
   </div>
 </template>
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
-import HeaderTitle from './components/HeaderTitle.vue';
 
-@Component({
-  components: {
-    HeaderTitle,
-  },
-})
+@Component
 export default class App extends Vue {
-  public title: string = '首页';
 }
 </script>
 
