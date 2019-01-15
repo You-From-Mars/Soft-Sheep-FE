@@ -1,4 +1,5 @@
 import Vue from 'vue';
+import axios from 'axios';
 import App from './App.vue';
 import router from './router';
 import store from './store';
@@ -15,6 +16,7 @@ Vue.use(Form);
 Vue.use(FormItem);
 Vue.use(Radio);
 
+Vue.prototype.$http = axios;
 new Vue({
   router,
   store,

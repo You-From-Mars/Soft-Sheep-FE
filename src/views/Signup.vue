@@ -1,7 +1,7 @@
 <template>
     <section class="signin-container">
         <h3>Sign Up</h3>
-        <el-form ref="form" :model="form" label-position="top">
+        <el-form ref="form" :model="form" label-width="80px">
             <el-form-item label="Username">
                 <el-input v-model="form.username"></el-input>
             </el-form-item>
@@ -15,7 +15,7 @@
             <el-form-item label="Password">
                 <el-input v-model="form.password"></el-input>
             </el-form-item>
-            <el-form-item label="Verify Password">
+            <el-form-item label="Verify">
                 <el-input v-model="verifyPassword"></el-input>
             </el-form-item>
             <el-button style="width: 100%;" type="primary" @click="onSubmit">Sign Up</el-button>
@@ -33,8 +33,8 @@ export default class Signup extends Vue {
         password: '',
     };
     private verifyPassword: string = '';
-    private onSubmit() {
-        console.log('-----onsubmit');
+    private async onSubmit() {
+        // const res =  this.$http.post('/signup');
     }
 }
 </script>
