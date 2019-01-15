@@ -20,5 +20,15 @@ export default new Router({
       name: 'articleDetail',
       component: page.Detail,
     },
+    {
+      path: '/signin',
+      name: 'signin',
+      component: page.Signin,
+    },
+    {
+      path: '/signup',
+      name: 'signup',
+      component: page.Signup,
+    },
   ],
 });

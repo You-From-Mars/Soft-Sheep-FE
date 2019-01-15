@@ -39,6 +39,7 @@ export default class Home extends Vue {
 <style lang="less">
   .article-list {
     width: 900px;
+    text-align: center;
     margin: 15px auto;
     >li {
       display: flex;
