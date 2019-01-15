@@ -8,7 +8,7 @@
           <article>
             <h4>{{item.title}}</h4>
             <p>{{item.content}}</p>
-            <el-button type="primary">More</el-button>
+            <el-button @click="toDetail(item.id)" type="primary">More</el-button>
           </article>
         </li>
       </ul>
@@ -26,34 +26,42 @@ import HeaderTitle from '../components/HeaderTitle.vue';
   },
 })
 export default class Home extends Vue {
-  public title: string = '首页';
+  public title: string = 'Home';
   private articleList: any = [
     {
       img: require('../assets/images/article_img.jpg'),
       title: 'title',
       content: 'I have to give a little shoutout to these cupcake pops, .',
+      id: 1,
     },
     {
       img: require('../assets/images/article_img.jpg'),
       title: 'title',
       content: 'I have to give a little shoutout to these cupcake pops, too. It was these .',
+      id: 2,
     },
     {
       img: require('../assets/images/article_img.jpg'),
       title: 'title',
       content: 'I have to give a little shoutout to these cupcake pops, too. It was these cuties .',
+      id: 3,
     },
     {
       img: require('../assets/images/article_img.jpg'),
       title: 'title',
       content: 'I have to give a little shoutout to these cupcake pops, too. It was these cuties that I .',
+      id: 3,
     },
     {
       img: require('../assets/images/article_img.jpg'),
       title: 'title',
       content: 'I have to give a little shoutout to these cupcake pops, too. It was these cuties that I first .',
+      id: 4,
     },
   ];
+  toDetail(id: number) {
+    this.$router.push(`/p/${id}`);
+  }
 }
 </script>
 <style lang="less">
@@ -63,7 +71,7 @@ export default class Home extends Vue {
     margin: 15px auto;
     >li {
       display: flex;
-      justify-content: space-between;
+      justify-content: stretch;
       border-top: 1px solid #E5E5E5;
       border-bottom: 1px solid #E5E5E5;
       margin-top: -1px;
@@ -76,13 +84,14 @@ export default class Home extends Vue {
       >article {
         position: relative;
         margin-left: 20px;
+        flex-grow: 1;
         h4 {
           font-size: 20px;
           margin-bottom: 24px;
           color: #CA2365;
         }
         p {
-          text-align: left;
+          text-align: center;
           color: #666;
         }
         button {

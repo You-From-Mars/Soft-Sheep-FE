@@ -2,7 +2,9 @@
   <div class="app-wrapper" id="app">
     <div class="top-container">
       <div class="home-top">
-        <h4>Soft Sheep</h4>
+        <h4>
+          <router-link to="/home">Soft Sheep</router-link>
+        </h4>
         <div class="page-header">
           <template>
             <router-link to="/signin">Sign In</router-link>
@@ -36,7 +38,9 @@ export default class App extends Vue {
     height: 100%;
     line-height: 57px;
     margin: 0 auto;
-    color: #fff;
+    a {
+      color: #fff;
+    }
 }
 .page-header {
   a {
