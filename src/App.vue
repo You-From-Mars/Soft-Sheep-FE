@@ -3,9 +3,11 @@
     <div class="top-container">
       <div class="home-top">
         <h4>Soft Sheep</h4>
-        <div>
-          <el-button>Sign In</el-button>
-          <el-button>Sign Up</el-button>
+        <div class="page-header">
+          <template>
+            <router-link to="/signin">Sign In</router-link>
+            <router-link to="/signup">Sign Up</router-link>
+          </template>
         </div>
       </div>
     </div>
@@ -35,5 +37,12 @@ export default class App extends Vue {
     line-height: 57px;
     margin: 0 auto;
     color: #fff;
+}
+.page-header {
+  a {
+    color: #fff;
+    font-weight: 500;
+    margin-left: 20px;
+  }
 }
 </style>

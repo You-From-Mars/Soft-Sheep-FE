@@ -30,5 +30,10 @@ export default new Router({
       name: 'signup',
       component: page.Signup,
     },
+    {
+      path: '/writer',
+      name: 'writer',
+      component: page.Writer,
+    },
   ],
 });
