@@ -28,11 +28,31 @@ import HeaderTitle from '../components/HeaderTitle.vue';
 export default class Home extends Vue {
   public title: string = '首页';
   private articleList: any = [
-    { img: require('../assets/images/article_img.jpg'), title: 'title', content: 'I have to give a little shoutout to these cupcake pops, too. It was these cuties that I first posted on the site in February of 2008 that unknowingly started a cake pop phenomenon.', },
-    { img: require('../assets/images/article_img.jpg'), title: 'title', content: 'I have to give a little shoutout to these cupcake pops, too. It was these cuties that I first posted on the site in February of 2008 that unknowingly started a cake pop phenomenon.', },
-    { img: require('../assets/images/article_img.jpg'), title: 'title', content: 'I have to give a little shoutout to these cupcake pops, too. It was these cuties that I first posted on the site in February of 2008 that unknowingly started a cake pop phenomenon.', },
-    { img: require('../assets/images/article_img.jpg'), title: 'title', content: 'I have to give a little shoutout to these cupcake pops, too. It was these cuties that I first posted on the site in February of 2008 that unknowingly started a cake pop phenomenon.', },
-    { img: require('../assets/images/article_img.jpg'), title: 'title', content: 'I have to give a little shoutout to these cupcake pops, too. It was these cuties that I first posted on the site in February of 2008 that unknowingly started a cake pop phenomenon.', },
+    {
+      img: require('../assets/images/article_img.jpg'),
+      title: 'title',
+      content: 'I have to give a little shoutout to these cupcake pops, .',
+    },
+    {
+      img: require('../assets/images/article_img.jpg'),
+      title: 'title',
+      content: 'I have to give a little shoutout to these cupcake pops, too. It was these .',
+    },
+    {
+      img: require('../assets/images/article_img.jpg'),
+      title: 'title',
+      content: 'I have to give a little shoutout to these cupcake pops, too. It was these cuties .',
+    },
+    {
+      img: require('../assets/images/article_img.jpg'),
+      title: 'title',
+      content: 'I have to give a little shoutout to these cupcake pops, too. It was these cuties that I .',
+    },
+    {
+      img: require('../assets/images/article_img.jpg'),
+      title: 'title',
+      content: 'I have to give a little shoutout to these cupcake pops, too. It was these cuties that I first .',
+    },
   ];
 }
 </script>

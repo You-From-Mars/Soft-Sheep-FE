@@ -16,11 +16,11 @@
 import { Component, Vue } from 'vue-property-decorator';
 @Component
 export default class Signin extends Vue {
-    private form: Object = {
+    private form: object = {
         email: '',
         password: '',
-    }
-    onSubmit() {
+    };
+    private onSubmit() {
         console.log('-----submit');
     }
 }

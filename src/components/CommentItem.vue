@@ -20,9 +20,9 @@ import { Component, Vue } from 'vue-property-decorator';
 })
 export default class CommentItem extends Vue {
     private commentList: object[] = [
-        { content: 'This is a beautiful website. Helen is so beautiful~~~~', username: 'Helen', date: 'July 17 2017', },
-        { content: 'This is a beautiful website. Helen is so beautiful~~~~', username: 'Helen', date: 'July 17 2017', },
-        { content: 'This is a beautiful website. Helen is so beautiful~~~~', username: 'Helen', date: 'July 17 2017', },
+        { content: 'This is a beautiful website. Helen is so beautiful~~~~', username: 'Helen', date: 'July 17 2017' },
+        { content: 'This is a beautiful website. Helen is so beautiful~~~~', username: 'Helen', date: 'July 17 2017' },
+        { content: 'This is a beautiful website. Helen is so beautiful~~~~', username: 'Helen', date: 'July 17 2017' },
     ];
 }
 </script>

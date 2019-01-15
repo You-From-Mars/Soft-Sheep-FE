@@ -26,14 +26,14 @@
 import { Component, Vue } from 'vue-property-decorator';
 @Component
 export default class Signup extends Vue {
-    private form: Object = {
+    private form: object = {
         username: '',
         email: '',
         sex: '',
         password: '',
-    }
+    };
     private verifyPassword: string = '';
-    onSubmit() {
+    private onSubmit() {
         console.log('-----onsubmit');
     }
 }
