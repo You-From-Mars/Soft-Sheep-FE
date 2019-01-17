@@ -59,6 +59,9 @@ export default class Home extends Vue {
       id: 4,
     },
   ];
+  async created() {
+    (<any>Window).$http.post('/softsheep/article', { title: '11', content: '22' });
+  }
   toDetail(id: number) {
     this.$router.push(`/p/${id}`);
   }
