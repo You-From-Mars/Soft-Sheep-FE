@@ -9,8 +9,8 @@
       </section>
       <section class="article-comment">
         <h4 class="article-comment-title">Leave a Comment</h4>
-        <comment-form></comment-form>
-        <comment-item></comment-item>
+        <comment-form @updateComment="getCommentList"></comment-form>
+        <comment-item :commentList="commentList"></comment-item>
       </section>
     </div>
   </div>
@@ -20,6 +20,14 @@ import { Component, Vue } from 'vue-property-decorator';
 import HeaderTitle from '../components/HeaderTitle.vue';
 import CommentForm from '../components/CommentForm.vue';
 import CommentItem from '../components/CommentItem.vue';
+
+interface commentItem {
+  commentUuid: String,
+  articleUuid: String,
+  userName: String,
+  createdTime: String,
+  commentContent: String,
+};
 
 @Component({
   components: {
@@ -35,13 +43,21 @@ export default class Detail extends Vue {
     createdTime: '',
     pageView: 0,
   };
+  private commentList: commentItem[] = [];
+
+  private articleId: string = '';
   created() {
+    this.articleId = this.$route.params.id;
     this.getArticleDetail();
+    this.getCommentList();
   }
   async getArticleDetail() {
-    const articleId = this.$route.params.id;
-    const res = await (<any>Window).$http.get(`/softsheep/article_detail?articleId=${articleId}`);
+    const res = await (<any>Window).$http.get(`/softsheep/article_detail?articleId=${this.articleId}`);
     this.articleDetailData = res.data;
+  }
+  async getCommentList() {
+    const res = await (<any>Window).$http.get(`/softsheep/commentlist?articleId=${this.articleId}`);
+    this.commentList = res.data;
   }
 }
 </script>

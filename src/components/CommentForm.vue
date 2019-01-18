@@ -16,13 +16,14 @@
 
 </template>
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator';
+import { Component, Vue, Emit } from 'vue-property-decorator';
 
 @Component({
     name: 'CommentForm',
 })
 export default class CommentForm extends Vue {
     private commentContent: string = '';
+    @Emit('updateComment')
     private async commentSubmit() {
         const articleId = this.$route.params.id;
         const res = await (<any>Window).$http.post('/softsheep/comment', {
@@ -31,6 +32,7 @@ export default class CommentForm extends Vue {
         });
         if (res.data === '保存成功') {
             this.$message.success('评论成功');
+            this.commentContent = '';
         }
     }
 }

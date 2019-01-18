@@ -4,26 +4,28 @@
             <i class="user-avartar"></i>
             <section>
                 <div class="comment-header">
-                    <h4 class="comment-username">{{item.username}}</h4>
-                    <span class="comment-date">{{item.date}}</span>
+                    <h4 class="comment-username">{{item.userName}}</h4>
+                    <span class="comment-date">{{item.createdTime}}</span>
                 </div>
-                <p class="comment-content">{{item.content}}</p>
+                <p class="comment-content">{{item.commentContent}}</p>
             </section>
         </li>
     </ul>
 </template>
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator';
-
+import { Component, Vue, Prop } from 'vue-property-decorator';
+interface commentItem {
+  commentUuid: String,
+  articleUuid: String,
+  userName: String,
+  createdTime: String,
+  commentContent: String,
+};
 @Component({
     name: 'CommentItem',
 })
 export default class CommentItem extends Vue {
-    private commentList: object[] = [
-        { content: 'This is a beautiful website. Helen is so beautiful~~~~', username: 'Helen', date: 'July 17 2017' },
-        { content: 'This is a beautiful website. Helen is so beautiful~~~~', username: 'Helen', date: 'July 17 2017' },
-        { content: 'This is a beautiful website. Helen is so beautiful~~~~', username: 'Helen', date: 'July 17 2017' },
-    ];
+    @Prop(Array) commentList!: commentItem[];
 }
 </script>
 <style lang="less">
