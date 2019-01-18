@@ -20,8 +20,11 @@ export default class Signin extends Vue {
         email: '',
         password: '',
     };
-    private onSubmit() {
-        console.log('-----submit');
+    private async onSubmit() {
+        const res = await (<any>Window).$http.post('/softsheep/signin', this.form);
+        if (res.data === '登录成功') {
+            this.$router.push('home');
+        }
     }
 }
 </script>

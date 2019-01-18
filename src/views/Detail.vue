@@ -30,6 +30,15 @@ import CommentItem from '../components/CommentItem.vue';
 })
 export default class Detail extends Vue {
   public title: string = 'title';
+  created() {
+    this.getArticleDetail();
+  }
+  async getArticleDetail() {
+    const articleId = this.$route.params.id;
+    console.log('articleId---', articleId);
+    const res = await (<any>Window).$http.get(`/softsheep/articlelist?article_detail=${articleId}`);
+    console.log('res----', res);
+  }
 }
 </script>
 <style lang="less">

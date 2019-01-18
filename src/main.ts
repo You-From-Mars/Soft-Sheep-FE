@@ -3,7 +3,7 @@ import axios from 'axios';
 import App from './App.vue';
 import router from './router';
 import store from './store';
-import { Button, Input, Form, FormItem, Radio } from 'element-ui';
+import { Button, Input, Form, FormItem, Radio, Message } from 'element-ui';
 import './registerServiceWorker';
 import 'element-ui/lib/theme-chalk/index.css';
 import './assets/css/reset.less';
@@ -17,6 +17,7 @@ Vue.use(Input);
 Vue.use(Form);
 Vue.use(FormItem);
 Vue.use(Radio);
+Vue.prototype.$message = Message;
 
 new Vue({
   router,

@@ -8,7 +8,7 @@
           <article>
             <h4>{{item.title}}</h4>
             <p>{{item.content}}</p>
-            <el-button @click="toDetail(item.id)" type="primary">More</el-button>
+            <el-button @click="toDetail(item.articleUuid)" type="primary">More</el-button>
           </article>
         </li>
       </ul>
@@ -27,40 +27,13 @@ import HeaderTitle from '../components/HeaderTitle.vue';
 })
 export default class Home extends Vue {
   public title: string = 'Home';
-  private articleList: any = [
-    {
-      img: require('../assets/images/article_img.jpg'),
-      title: 'title',
-      content: 'I have to give a little shoutout to these cupcake pops, .',
-      id: 1,
-    },
-    {
-      img: require('../assets/images/article_img.jpg'),
-      title: 'title',
-      content: 'I have to give a little shoutout to these cupcake pops, too. It was these .',
-      id: 2,
-    },
-    {
-      img: require('../assets/images/article_img.jpg'),
-      title: 'title',
-      content: 'I have to give a little shoutout to these cupcake pops, too. It was these cuties .',
-      id: 3,
-    },
-    {
-      img: require('../assets/images/article_img.jpg'),
-      title: 'title',
-      content: 'I have to give a little shoutout to these cupcake pops, too. It was these cuties that I .',
-      id: 3,
-    },
-    {
-      img: require('../assets/images/article_img.jpg'),
-      title: 'title',
-      content: 'I have to give a little shoutout to these cupcake pops, too. It was these cuties that I first .',
-      id: 4,
-    },
-  ];
-  async created() {
-    (<any>Window).$http.post('/softsheep/article', { title: '11', content: '22' });
+  private articleList: any = [];
+  created() {
+    this.getArticles();
+  }
+  async getArticles() {
+    const res = await (<any>Window).$http.get('/softsheep/articlelist');
+    this.articleList = res.data;
   }
   toDetail(id: number) {
     this.$router.push(`/p/${id}`);
