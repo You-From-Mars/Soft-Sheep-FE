@@ -10,7 +10,7 @@
             </el-input>
         </section>
         <div class="article-button-wrapper">
-            <el-button class="article-post-button">Post</el-button>
+            <el-button @click="commentSubmit" class="article-post-button">Post</el-button>
         </div>
     </section>
 
@@ -23,6 +23,16 @@ import { Component, Vue } from 'vue-property-decorator';
 })
 export default class CommentForm extends Vue {
     private commentContent: string = '';
+    private async commentSubmit() {
+        const articleId = this.$route.params.id;
+        const res = await (<any>Window).$http.post('/softsheep/comment', {
+            content: this.commentContent,
+            articleId,
+        });
+        if (res.data === '保存成功') {
+            this.$message.success('评论成功');
+        }
+    }
 }
 </script>
 <style lang="less">

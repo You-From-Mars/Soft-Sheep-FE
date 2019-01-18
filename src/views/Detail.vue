@@ -1,11 +1,11 @@
 <template>
   <div>
-    <header-title :titleContent="title"></header-title>
+    <header-title :titleContent="articleDetailData.title"></header-title>
     <div class="page-container">
       <section class="detail-article">
-        <div class="article-create-date">July 17, 2017</div>
-        <h4 class="article-title">MEOW</h4>
-        <p class="article-content">How cute are these cushy kitties! How cute are these cushy kitties! How cute are these cushy kitties! How cute are these cushy kitties!How cute are these cushy kitties!</p>
+        <div class="article-create-date">{{articleDetailData.createdTime}}</div>
+        <h4 class="article-title">{{articleDetailData.title}}</h4>
+        <p class="article-content">{{articleDetailData.content}}</p>
       </section>
       <section class="article-comment">
         <h4 class="article-comment-title">Leave a Comment</h4>
@@ -29,15 +29,19 @@ import CommentItem from '../components/CommentItem.vue';
   },
 })
 export default class Detail extends Vue {
-  public title: string = 'title';
+  private articleDetailData = {
+    title: '',
+    content: '',
+    createdTime: '',
+    pageView: 0,
+  };
   created() {
     this.getArticleDetail();
   }
   async getArticleDetail() {
     const articleId = this.$route.params.id;
-    console.log('articleId---', articleId);
-    const res = await (<any>Window).$http.get(`/softsheep/articlelist?article_detail=${articleId}`);
-    console.log('res----', res);
+    const res = await (<any>Window).$http.get(`/softsheep/article_detail?articleId=${articleId}`);
+    this.articleDetailData = res.data;
   }
 }
 </script>
