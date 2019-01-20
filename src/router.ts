@@ -11,8 +11,13 @@ export default new Router({
       redirect: '/home',
     },
     {
-      path: '/home',
-      name: 'home',
+      path: '/u/:id',
+      name: 'user',
+      component: page.User,
+    },
+    {
+      path: '/personal',
+      name: 'personal',
       component: page.Home,
     },
     {

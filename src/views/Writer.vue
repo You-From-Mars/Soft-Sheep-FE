@@ -1,8 +1,9 @@
 <template>
     <section class="article-markdown">
         <div class="markdown-left">
+            <el-input placeholder="Article title" v-model="title"></el-input>
             <div class="markdown-tool">
-                <el-button>Publish</el-button>
+                <el-button @click="submit">Publish</el-button>
             </div>
             <el-input v-model="source" type="textarea"></el-input>
         </div>
@@ -21,8 +22,22 @@ export default {
     },
     data() {
         return {
+            userId: '1',
+            title: '',
             source: '',
         };
+    },
+    methods: {
+        async submit() {
+            const body = {
+                title: this.title,
+                content: this.source,
+            };
+            const res = await Window.$http.post('/softsheep/article', body);
+            if (res.data == '创建成功') {
+                this.$router.push(`/u/${this.userId}`);
+            }
+        },
     },
 };
 </script>
@@ -36,7 +51,7 @@ export default {
         height: 100%;
         border: 1px dashed @pink-color;
         .el-textarea {
-            height: calc(~"100% - 45px");
+            height: calc(~"100% - 90px");
         }
         textarea {
             height: 100%;

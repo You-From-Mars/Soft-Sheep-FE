@@ -10,7 +10,7 @@
       <section class="article-comment">
         <h4 class="article-comment-title">Leave a Comment</h4>
         <comment-form @updateComment="getCommentList"></comment-form>
-        <comment-item :commentList="commentList"></comment-item>
+        <comment-item v-if="commentList.length > 0" :commentList="commentList"></comment-item>
       </section>
     </div>
   </div>

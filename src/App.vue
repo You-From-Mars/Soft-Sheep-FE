@@ -6,7 +6,11 @@
           <router-link to="/home">Soft Sheep</router-link>
         </h4>
         <div class="page-header">
-          <template>
+          <template v-if="isSignin">
+            <router-link to="/writer">Create Article</router-link>
+            <a href="javascript:;" @click="exit">exit</a>
+          </template>
+          <template v-else>
             <router-link to="/signin">Sign In</router-link>
             <router-link to="/signup">Sign Up</router-link>
           </template>
@@ -18,9 +22,27 @@
 </template>
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
+import Bus from './bus';
 
 @Component
 export default class App extends Vue {
+  private isSignin: string|null = '';
+  created() {
+    this.getIsSignin();
+    Bus.$on('isSignin', (value: string) => {
+      console.log('----------');
+      this.isSignin = value;
+    });
+  }
+  getIsSignin() {
+    this.isSignin = window.localStorage.getItem('email');
+  }
+  async exit() {
+    const res = await (<any>Window).$http.post('/softsheep/loginout');
+    window.localStorage.setItem('email', '');
+    this.isSignin = '';
+    this.$router.push('/signin')
+  }
 }
 </script>
 

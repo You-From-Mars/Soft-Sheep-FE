@@ -14,15 +14,23 @@
 </template>
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
+import Bus from '../bus';
+
+interface formType{
+    email: string,
+    password: string,
+}
 @Component
 export default class Signin extends Vue {
-    private form: object = {
+    private form: formType = {
         email: '',
         password: '',
     };
     private async onSubmit() {
         const res = await (<any>Window).$http.post('/softsheep/signin', this.form);
         if (res.data === '登录成功') {
+            window.localStorage.setItem('email', this.form.email);
+            Bus.$emit('isSignin', this.form.email);
             this.$router.push('home');
         }
     }
