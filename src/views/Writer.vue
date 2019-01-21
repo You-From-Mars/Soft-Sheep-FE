@@ -34,7 +34,7 @@ export default {
                 content: this.source,
             };
             const res = await Window.$http.post('/softsheep/article', body);
-            if (res.data == '创建成功') {
+            if (res.data === '创建成功') {
                 this.$router.push(`/u/${this.userId}`);
             }
         },

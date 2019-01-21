@@ -6,8 +6,9 @@
           <router-link to="/home">Soft Sheep</router-link>
         </h4>
         <div class="page-header">
-          <template v-if="isSignin">
+          <template v-if="isSignin.userName">
             <router-link to="/writer">Create Article</router-link>
+            <router-link :to="`/u/${userId}`">{{isSignin.userName}}</router-link>
             <a href="javascript:;" @click="exit">exit</a>
           </template>
           <template v-else>
@@ -26,20 +27,26 @@ import Bus from './bus';
 
 @Component
 export default class App extends Vue {
-  private isSignin: string|null = '';
-  created() {
+  private isSignin: Object = '';
+  private userName: string|null = '';
+  private userId: string = '1';
+  private created() {
     this.getIsSignin();
-    Bus.$on('isSignin', (value: string) => {
-      console.log('----------');
+    Bus.$on('isSignin', (value: Object) => {
       this.isSignin = value;
+      this.userName = window.localStorage.getItem('userName');
     });
   }
-  getIsSignin() {
-    this.isSignin = window.localStorage.getItem('email');
+  private getIsSignin() {
+    this.isSignin = {
+       email: window.localStorage.getItem('email'),
+       userName: window.localStorage.getItem('userName'),
+    };
   }
-  async exit() {
+  private async exit() {
     const res = await (<any>Window).$http.post('/softsheep/loginout');
     window.localStorage.setItem('email', '');
+    window.localStorage.setItem('userName', '');
     this.isSignin = '';
     this.$router.push('/signin')
   }

@@ -46,16 +46,16 @@ export default class Detail extends Vue {
   private commentList: commentItem[] = [];
 
   private articleId: string = '';
-  created() {
+  private created() {
     this.articleId = this.$route.params.id;
     this.getArticleDetail();
     this.getCommentList();
   }
-  async getArticleDetail() {
+  private async getArticleDetail() {
     const res = await (<any>Window).$http.get(`/softsheep/article_detail?articleId=${this.articleId}`);
     this.articleDetailData = res.data;
   }
-  async getCommentList() {
+  private async getCommentList() {
     const res = await (<any>Window).$http.get(`/softsheep/commentlist?articleId=${this.articleId}`);
     this.commentList = res.data;
   }

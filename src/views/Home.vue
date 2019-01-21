@@ -28,14 +28,14 @@ import HeaderTitle from '../components/HeaderTitle.vue';
 export default class Home extends Vue {
   public title: string = 'Home';
   private articleList: any = [];
-  created() {
+  private created() {
     this.getArticles();
   }
-  async getArticles() {
+  private async getArticles() {
     const res = await (<any>Window).$http.get('/softsheep/articlelist');
     this.articleList = res.data;
   }
-  toDetail(id: number) {
+  private toDetail(id: number) {
     this.$router.push(`/p/${id}`);
   }
 }

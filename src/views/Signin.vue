@@ -28,9 +28,14 @@ export default class Signin extends Vue {
     };
     private async onSubmit() {
         const res = await (<any>Window).$http.post('/softsheep/signin', this.form);
-        if (res.data === '登录成功') {
-            window.localStorage.setItem('email', this.form.email);
-            Bus.$emit('isSignin', this.form.email);
+        if (res.data) {
+            const body = res.data;
+            window.localStorage.setItem('email', body.email);
+            window.localStorage.setItem('userName', body.userName);
+            Bus.$emit('isSignin', {
+                email: body.email,
+                userName: body.userName,
+            });
             this.$router.push('home');
         }
     }

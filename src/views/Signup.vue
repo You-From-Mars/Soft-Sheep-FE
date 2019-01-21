@@ -38,7 +38,7 @@ export default class Signup extends Vue {
         if (res.data === '注册成功') {
             this.$message({
                 message: '恭喜你，注册成功!',
-                type: 'success'
+                type: 'success',
             });
             this.$router.push('/signin');
         }
