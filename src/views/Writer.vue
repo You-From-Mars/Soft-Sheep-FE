@@ -1,28 +1,22 @@
 <template>
     <section class="article-markdown">
-        <div class="markdown-left">
+        <div class="markdown-header">
             <el-input placeholder="Article title" v-model="title"></el-input>
             <div class="markdown-tool">
                 <el-button @click="submit">Publish</el-button>
             </div>
-            <el-input v-model="source" type="textarea"></el-input>
         </div>
-        <div class="markdowm-wrapper">
-            <vue-markdown :source="source"></vue-markdown>
-        </div>
-        <div id="capture" style="padding: 10px; background: #f5da55">
-            <h4 style="color: #000; ">Hello world!</h4>
-        </div>
+        <mavon-editor v-model="source"/>
     </section>
 </template>
 <script>
-import VueMarkdown from 'vue-markdown';
+import mavonEditor from 'mavon-editor';
+import 'mavon-editor/dist/css/index.css';
 import { Component, Vue } from 'vue-property-decorator';
 
+Vue.use(mavonEditor);
+
 export default {
-    components: {
-        VueMarkdown,
-    },
     data() {
         return {
             userId: '1',
@@ -47,24 +41,12 @@ export default {
 <style lang="less">
 @import '../assets/css/var.less';
 .article-markdown {
-    display: flex;
+    // display: flex;
     height: calc(~"100% - 57px");
-    > div {
-        width: 50%;
-        height: 100%;
-        border: 1px dashed @pink-color;
-        .el-textarea {
-            height: calc(~"100% - 90px");
-        }
-        textarea {
-            height: 100%;
-            border: none;
-        }
-    }
     .markdowm-wrapper {
         overflow-y: scroll;
     }
-    .markdown-left {
+    .markdown-header {
         .markdown-tool {
             height: 35px;
             padding: 10px 10px 0 0;
@@ -83,6 +65,9 @@ export default {
                 }
             }
         }
+    }
+    .markdown-body {
+        height: calc(~"100% - 91px");
     }
 }
 </style>

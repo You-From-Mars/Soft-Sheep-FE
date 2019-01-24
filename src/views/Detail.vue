@@ -5,7 +5,7 @@
       <section class="detail-article">
         <div class="article-create-date">{{articleDetailData.createdTime}}</div>
         <h4 class="article-title">{{articleDetailData.title}}</h4>
-        <p class="article-content">{{articleDetailData.content}}</p>
+        <p class="article-content" v-html="articleDetailData.content"></p>
       </section>
       <section class="article-comment">
         <h4 class="article-comment-title">Leave a Comment</h4>
@@ -16,6 +16,7 @@
   </div>
 </template>
 <script lang="ts">
+import showdown from 'showdown';
 import { Component, Vue } from 'vue-property-decorator';
 import HeaderTitle from '../components/HeaderTitle.vue';
 import CommentForm from '../components/CommentForm.vue';
@@ -53,7 +54,9 @@ export default class Detail extends Vue {
   }
   private async getArticleDetail() {
     const res = await (<any>Window).$http.get(`/softsheep/article_detail?articleId=${this.articleId}`);
+    const converter = new showdown.Converter()
     this.articleDetailData = res.data;
+    this.articleDetailData.content = converter.makeHtml(res.data.content);
   }
   private async getCommentList() {
     const res = await (<any>Window).$http.get(`/softsheep/commentlist?articleId=${this.articleId}`);
