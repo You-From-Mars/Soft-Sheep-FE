@@ -78,7 +78,7 @@ export default class Home extends Vue {
   private getWindowHeight(): number{
     let windowHeight: number = 0;
 　　if(document.compatMode === 'CSS1Compat'){
-　　　　windowHeight = document.documentElement.clientHeight;
+　　　　windowHeight = document.documentElement ? document.documentElement.clientHeight : 0;
 　　} else {
 　　　　windowHeight = document.body.clientHeight;
 　　}
@@ -88,7 +88,6 @@ export default class Home extends Vue {
     pageHandler = false;
     this.loadingShow = true;
     const res = await (<any> Window).$http.get(`/softsheep/articlelist?pageNum=${this.pageNum}&pageSize=${this.pageSize}`);
-    console.log('data---', res);
     this.totalPage = res.data.totalPage;
     this.loadingShow = false;
     this.articleList.push(...res.data.overviews);
