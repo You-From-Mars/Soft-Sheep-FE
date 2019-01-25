@@ -5,7 +5,7 @@
             <img :src="item.img" />
             <article>
                 <h4>{{item.title}}</h4>
-                <p>{{item.content}}</p>
+                <p>{{item.overviewContent}}</p>
                 <el-button @click="toDetail(item.articleUuid)" type="primary">More</el-button>
             </article>
             </li>
@@ -25,7 +25,7 @@ export default class User extends Vue {
         this.getArticles();
     }
     private async getArticles() {
-        const res = await (<any>Window).$http.get('/softsheep/personal_articles');
+        const res = await (<any> Window).$http.get('/softsheep/personal_articles');
         this.articleList = res.data;
     }
     private toDetail(id: number) {

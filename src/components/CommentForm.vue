@@ -26,7 +26,7 @@ export default class CommentForm extends Vue {
     @Emit('updateComment')
     private async commentSubmit() {
         const articleId = this.$route.params.id;
-        const res = await (<any>Window).$http.post('/softsheep/comment', {
+        const res = await (<any> Window).$http.post('/softsheep/comment', {
             content: this.commentContent,
             articleId,
         });

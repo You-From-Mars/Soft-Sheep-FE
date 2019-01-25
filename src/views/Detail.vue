@@ -16,7 +16,9 @@
   </div>
 </template>
 <script lang="ts">
-import showdown from 'showdown';
+// import showdown from 'showdown';
+import { Reader } from '../assets/js/easy-markdown.min.js';
+import '../assets/js/easy-markdown.min.css';
 import { Component, Vue } from 'vue-property-decorator';
 import HeaderTitle from '../components/HeaderTitle.vue';
 import CommentForm from '../components/CommentForm.vue';
@@ -49,17 +51,22 @@ export default class Detail extends Vue {
   private articleId: string = '';
   private created() {
     this.articleId = this.$route.params.id;
-    this.getArticleDetail();
     this.getCommentList();
   }
+  private mounted () {
+    this.getArticleDetail();
+  }
   private async getArticleDetail() {
-    const res = await (<any>Window).$http.get(`/softsheep/article_detail?articleId=${this.articleId}`);
-    const converter = new showdown.Converter()
+    const res = await (<any> Window).$http.get(`/softsheep/article_detail?articleId=${this.articleId}`);
+    // const converter = new showdown.Converter()
     this.articleDetailData = res.data;
-    this.articleDetailData.content = converter.makeHtml(res.data.content);
+    const markdown = new Reader(res.data.content);
+    console.log('markdown.showHtml()------', markdown.showHtml());
+    this.articleDetailData.content = markdown.showHtml();
+    // this.articleDetailData.content = converter.makeHtml(res.data.content);
   }
   private async getCommentList() {
-    const res = await (<any>Window).$http.get(`/softsheep/commentlist?articleId=${this.articleId}`);
+    const res = await (<any> Window).$http.get(`/softsheep/commentlist?articleId=${this.articleId}`);
     this.commentList = res.data;
   }
 }

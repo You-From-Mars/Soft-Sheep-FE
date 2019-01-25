@@ -27,7 +27,7 @@ export default class Signin extends Vue {
         password: '',
     };
     private async onSubmit() {
-        const res = await (<any>Window).$http.post('/softsheep/signin', this.form);
+        const res = await (<any> Window).$http.post('/softsheep/signin', this.form);
         if (res.data) {
             const body = res.data;
             window.localStorage.setItem('email', body.email);

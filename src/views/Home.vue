@@ -7,7 +7,7 @@
           <img :src="item.img" />
           <article>
             <h4>{{item.title}}</h4>
-            <p>{{item.content}}</p>
+            <p>{{item.overviewContent}}</p>
             <el-button @click="toDetail(item.articleUuid)" type="primary">More</el-button>
           </article>
         </li>
@@ -87,10 +87,11 @@ export default class Home extends Vue {
   private async getArticles() {
     pageHandler = false;
     this.loadingShow = true;
-    const res = await (<any>Window).$http.get(`/softsheep/articlelist?pageNum=${this.pageNum}&pageSize=${this.pageSize}`);
-    this.totalPage = res.data.totlePage;
+    const res = await (<any> Window).$http.get(`/softsheep/articlelist?pageNum=${this.pageNum}&pageSize=${this.pageSize}`);
+    console.log('data---', res);
+    this.totalPage = res.data.totalPage;
     this.loadingShow = false;
-    this.articleList.push(...res.data.articles);
+    this.articleList.push(...res.data.overviews);
     setTimeout(() => {
       pageHandler = true;
     }, 1000);

@@ -44,7 +44,7 @@ export default class App extends Vue {
     };
   }
   private async exit() {
-    const res = await (<any>Window).$http.post('/softsheep/loginout');
+    const res = await (<any> Window).$http.post('/softsheep/loginout');
     window.localStorage.setItem('email', '');
     window.localStorage.setItem('userName', '');
     this.isSignin = '';
