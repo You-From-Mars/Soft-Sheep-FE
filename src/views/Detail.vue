@@ -3,8 +3,13 @@
     <header-title :titleContent="articleDetailData.title"></header-title>
     <div class="page-container">
       <section class="detail-article">
-        <div class="article-create-date">{{articleDetailData.createdTime}}</div>
-        <h4 class="article-title">{{articleDetailData.title}}</h4>
+        <section class="article-header">
+          <div>
+            <div class="article-create-date">{{articleDetailData.createdTime}}</div>
+            <h4 class="article-title">{{articleDetailData.title}}</h4>
+          </div>
+          <router-link v-if="articleDetailData.isSelf" :to="`/writer?id=${$route.params.id}`">Edit</router-link>
+        </section>
         <p class="article-content" v-html="articleDetailData.content"></p>
       </section>
       <section class="article-comment">
@@ -16,7 +21,6 @@
   </div>
 </template>
 <script lang="ts">
-// import showdown from 'showdown';
 import { Reader } from '../assets/js/easy-markdown.min.js';
 import '../assets/js/easy-markdown.min.css';
 import { Component, Vue } from 'vue-property-decorator';
@@ -45,6 +49,7 @@ export default class Detail extends Vue {
     content: '',
     createdTime: '',
     pageView: 0,
+    isSelf: 0,
   };
   private commentList: commentItem[] = [];
 
@@ -58,12 +63,9 @@ export default class Detail extends Vue {
   }
   private async getArticleDetail() {
     const res = await (<any> Window).$http.get(`/softsheep/article_detail?articleId=${this.articleId}`);
-    // const converter = new showdown.Converter()
     this.articleDetailData = res.data;
     const markdown = new Reader(res.data.content);
-    console.log('markdown.showHtml()------', markdown.showHtml());
     this.articleDetailData.content = markdown.showHtml();
-    // this.articleDetailData.content = converter.makeHtml(res.data.content);
   }
   private async getCommentList() {
     const res = await (<any> Window).$http.get(`/softsheep/commentlist?articleId=${this.articleId}`);
@@ -100,6 +102,18 @@ export default class Detail extends Vue {
     &-title {
       color: @pink-color;
       margin-bottom: 20px;
+    }
+  }
+  .article-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    a {
+      padding: 5px 15px;
+      color: @pink-color;
+      &:hover {
+        color: lighten(@pink-color, 10%);
+      }
     }
   }
 </style>

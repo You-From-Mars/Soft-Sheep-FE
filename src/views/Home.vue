@@ -112,6 +112,8 @@ export default class Home extends Vue {
       border-bottom: 1px solid #E5E5E5;
       margin-top: -1px;
       padding: 27px 0;
+      font-size: 12px;
+      line-height: 25px;
       img {
         width: 184px;
         height: 148px;
