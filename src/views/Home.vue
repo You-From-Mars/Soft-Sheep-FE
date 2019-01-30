@@ -15,6 +15,7 @@
               <i class="el-icon-view"></i>
               {{item.pageView}}
               <i class="el-icon-star-on"></i>
+              {{item.starCount}}
             </div>
             <!-- <el-button @click="toDetail(item.articleUuid)" type="primary">More</el-button> -->
           </article>

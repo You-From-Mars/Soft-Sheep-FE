@@ -12,6 +12,11 @@
         </section>
         <p class="article-content" v-html="articleDetailData.content"></p>
       </section>
+      <section class="star-container">
+        <i v-if="isStar" @click="removeStar" class="el-icon-star-on"></i>
+        <i v-else @click="star" class="el-icon-star-off"></i>
+        {{articleDetailData.starCount}}
+      </section>
       <section class="article-comment">
         <h4 class="article-comment-title">Leave a Comment</h4>
         <comment-form @updateComment="getCommentList"></comment-form>
@@ -50,16 +55,23 @@ export default class Detail extends Vue {
     createdTime: '',
     pageView: 0,
     isSelf: 0,
+    starCount: 0,
   };
+  private isStar = false;
   private commentList: commentItem[] = [];
 
   private articleId: string = '';
   private created() {
     this.articleId = this.$route.params.id;
+    this.getIsStar();
     this.getCommentList();
   }
   private mounted () {
     this.getArticleDetail();
+  }
+  private async getIsStar() {
+    const res = await (<any> Window).$http.get(`/softsheep/isstar?articleUuid=${this.articleId}`);
+    this.isStar = res;
   }
   private async getArticleDetail() {
     const res = await (<any> Window).$http.get(`/softsheep/article_detail?articleId=${this.articleId}`);
@@ -70,6 +82,20 @@ export default class Detail extends Vue {
   private async getCommentList() {
     const res = await (<any> Window).$http.get(`/softsheep/commentlist?articleId=${this.articleId}`);
     this.commentList = res;
+  }
+  private async star() {
+    const res = await (<any> Window).$http.post(`/softsheep/star`, {articleUuid: this.articleId});
+    if (res === 'CODE_SUCCESS') {
+      this.isStar = true;
+      this.articleDetailData.starCount++;
+    }
+  }
+  private async removeStar() {
+    const res = await (<any> Window).$http.post(`/softsheep/removestar`, {articleUuid: this.articleId});
+    if (res === 'CODE_SUCCESS') {
+      this.isStar = false;
+      this.articleDetailData.starCount--;
+    }
   }
 }
 </script>
@@ -111,6 +137,19 @@ export default class Detail extends Vue {
     a {
       padding: 5px 15px;
       color: @pink-color;
+      &:hover {
+        color: lighten(@pink-color, 10%);
+      }
+    }
+  }
+  .star-container {
+    line-height: 30px;
+    .marginCenter();
+    margin-top: 20px;
+    .el-icon-star-off, .el-icon-star-on{
+      cursor: pointer;
+      color: @pink-color;
+      font-size: 25px;
       &:hover {
         color: lighten(@pink-color, 10%);
       }
