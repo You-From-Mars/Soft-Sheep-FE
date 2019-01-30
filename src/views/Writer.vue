@@ -4,7 +4,7 @@
             <el-input placeholder="Article title" v-model="title"></el-input>
             <div class="markdown-tool">
                 <el-button v-if="articleId" @click="submit(articleId)">Update</el-button>
-                <el-button v-else @click="submit">Publish</el-button>
+                <el-button v-else @click="submit('')">Publish</el-button>
             </div>
         </div>
         <mavon-editor v-model="source"/>
@@ -20,7 +20,6 @@ Vue.use(mavonEditor);
 export default {
     data() {
         return {
-            userId: '1',
             title: '',
             source: '',
             articleId: '',
@@ -35,20 +34,17 @@ export default {
     methods: {
         async getArticleDetail() {
             const res = await Window.$http.get(`/softsheep/article_detail?articleId=${this.articleId}`);
-            this.title = res.data.title;
-            this.source = res.data.content;
+            this.title = res.title;
+            this.source = res.content;
         },
-        submit(id) {
+        async submit(id = '') {
             const body = {
                 title: this.title,
                 content: this.source,
                 id,
             };
-
-            const res = Window.$http.post('/softsheep/article', body);
-            if (res.data === '创建成功') {
-                this.$router.push(`/u/${this.userId}`);
-            }
+            const res = await Window.$http.post('/softsheep/article', body);
+            this.$router.push(`/p/${res}`);
         },
     },
 };

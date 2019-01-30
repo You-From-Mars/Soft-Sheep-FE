@@ -63,13 +63,13 @@ export default class Detail extends Vue {
   }
   private async getArticleDetail() {
     const res = await (<any> Window).$http.get(`/softsheep/article_detail?articleId=${this.articleId}`);
-    this.articleDetailData = res.data;
-    const markdown = new Reader(res.data.content);
+    this.articleDetailData = res;
+    const markdown = new Reader(res.content);
     this.articleDetailData.content = markdown.showHtml();
   }
   private async getCommentList() {
     const res = await (<any> Window).$http.get(`/softsheep/commentlist?articleId=${this.articleId}`);
-    this.commentList = res.data;
+    this.commentList = res;
   }
 }
 </script>

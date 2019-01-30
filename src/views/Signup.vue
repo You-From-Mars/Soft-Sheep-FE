@@ -42,23 +42,23 @@ export default class Signup extends Vue {
         ],
         password: [{ required: true, message: 'Please enter password', trigger: 'blur' }],
     };
-    private async onSubmit() {
-        this.$refs['form'].validate((validate) => {
+    private onSubmit() {
+        this.$refs['form'].validate(async (validate) => {
             if (validate) {
-                alert('submit!');
+                const res = await (<any> Window).$http.post('/softsheep/signup', this.form);
+                if (res === '注册成功') {
+                    this.$message({
+                        message: '恭喜你，注册成功!',
+                        type: 'success',
+                    });
+                    this.$router.push('/signin');
+                }
             } else {
                 console.log('error submit!!');
                 return;
             }
         });
-        const res = await (<any> Window).$http.post('/softsheep/signup', this.form);
-        if (res.data === '注册成功') {
-            this.$message({
-                message: '恭喜你，注册成功!',
-                type: 'success',
-            });
-            this.$router.push('/signin');
-        }
+
     }
 }
 </script>

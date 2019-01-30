@@ -88,9 +88,9 @@ export default class Home extends Vue {
     pageHandler = false;
     this.loadingShow = true;
     const res = await (<any> Window).$http.get(`/softsheep/articlelist?pageNum=${this.pageNum}&pageSize=${this.pageSize}`);
-    this.totalPage = res.data.totalPage;
+    this.totalPage = res.totalPage;
     this.loadingShow = false;
-    this.articleList.push(...res.data.overviews);
+    this.articleList.push(...res.overviews);
     setTimeout(() => {
       pageHandler = true;
     }, 1000);

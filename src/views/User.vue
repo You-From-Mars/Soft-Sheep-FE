@@ -26,7 +26,7 @@ export default class User extends Vue {
     }
     private async getArticles() {
         const res = await (<any> Window).$http.get('/softsheep/personal_articles');
-        this.articleList = res.data;
+        this.articleList = res;
     }
     private toDetail(id: number) {
         this.$router.push(`/p/${id}`);
