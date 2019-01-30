@@ -4,11 +4,19 @@
     <div class="page-container" id="page_home">
       <ul class="article-list">
         <li v-for="(item, index) in articleList" :key="index">
-          <img :src="item.img" />
+          <img v-if="item.img" :src="item.img" />
           <article>
-            <h4>{{item.title}}</h4>
+            <h4 @click="toDetail(item.articleUuid)">{{item.title}}</h4>
+            <div class="article-user">
+              {{item.author}}
+            </div>
             <p>{{item.overviewContent}}</p>
-            <el-button @click="toDetail(item.articleUuid)" type="primary">More</el-button>
+            <div class="article-item-buttom">
+              <i class="el-icon-view"></i>
+              {{item.pageView}}
+              <i class="el-icon-star-on"></i>
+            </div>
+            <!-- <el-button @click="toDetail(item.articleUuid)" type="primary">More</el-button> -->
           </article>
         </li>
       </ul>
@@ -101,6 +109,7 @@ export default class Home extends Vue {
 }
 </script>
 <style lang="less">
+
   .article-list {
     width: 900px;
     text-align: center;
@@ -125,12 +134,26 @@ export default class Home extends Vue {
         flex-grow: 1;
         h4 {
           font-size: 20px;
-          margin-bottom: 24px;
+          margin-bottom: 5px;
           color: #CA2365;
+          cursor: pointer;
+          &:hover {
+            color: lighten(#CA2365, 10%);
+          }
+        }
+        .article-user {
+          margin-bottom: 10px;
+          color: #666;
         }
         p {
-          text-align: center;
-          color: #666;
+          padding: 0 10px;
+          text-align: left;
+          color: #667;
+        }
+        .article-item-buttom {
+          text-align: left;
+          padding: 0 10px;
+          color: #ccc;
         }
         button {
           position: absolute;
