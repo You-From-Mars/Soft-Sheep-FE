@@ -16,6 +16,8 @@
               {{item.pageView}}
               <i class="el-icon-star-on"></i>
               {{item.starCount}}
+              <i class="el-icon-edit-outline"></i>
+              {{item.commentCount}}
             </div>
             <!-- <el-button @click="toDetail(item.articleUuid)" type="primary">More</el-button> -->
           </article>

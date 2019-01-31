@@ -30,7 +30,7 @@ export default class CommentForm extends Vue {
             content: this.commentContent,
             articleId,
         });
-        if (res === '保存成功') {
+        if (res === 'CODE_SUCCESS') {
             this.$message.success('评论成功');
             this.commentContent = '';
         }

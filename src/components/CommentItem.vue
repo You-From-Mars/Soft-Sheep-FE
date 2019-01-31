@@ -1,16 +1,18 @@
 <template>
-    <ul class="comment-container">
-        <li class="comment-item" v-for="(item, index) in commentList" :key="index">
-            <i class="user-avartar"></i>
-            <section>
-                <div class="comment-header">
-                    <h4 class="comment-username">{{item.userName}}</h4>
-                    <span class="comment-date">{{item.createdTime}}</span>
-                </div>
-                <p class="comment-content">{{item.commentContent}}</p>
-            </section>
-        </li>
-    </ul>
+    <div>
+        <ul class="comment-container">
+            <li class="comment-item" v-for="(item, index) in commentList" :key="index">
+                <i class="user-avartar"></i>
+                <section>
+                    <div class="comment-header">
+                        <h4 class="comment-username">{{item.userName}}</h4>
+                        <span class="comment-date">{{item.createdTime}}</span>
+                    </div>
+                    <p class="comment-content">{{item.commentContent}}</p>
+                </section>
+            </li>
+        </ul>
+    </div>
 </template>
 <script lang="ts">
 import { Component, Vue, Prop } from 'vue-property-decorator';
