@@ -1,7 +1,7 @@
 <template>
     <section class="signin-container">
         <h3>Sign Up</h3>
-        <el-form ref="form" :rules="rules" :model="form" label-width="80px">
+        <el-form ref="signUpForm" :rules="rules" :model="form" label-width="80px">
             <el-form-item label="Username" prop="username">
                 <el-input v-model="form.username"></el-input>
             </el-form-item>
@@ -24,6 +24,7 @@
 </template>
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
+import { Form } from 'element-ui';
 import { emailRule } from '../utils/CustomValidator';
 @Component
 export default class Signup extends Vue {
@@ -43,7 +44,7 @@ export default class Signup extends Vue {
         password: [{ required: true, message: 'Please enter password', trigger: 'blur' }],
     };
     private onSubmit() {
-        this.$refs['form'].validate(async (validate) => {
+        (this.$refs.signUpForm as Form).validate(async (validate) => {
             if (validate) {
                 const res = await (<any> Window).$http.post('/softsheep/signup', this.form);
                 if (res === '注册成功') {
