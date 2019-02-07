@@ -117,7 +117,7 @@ export default class Home extends Vue {
     width: 900px;
     text-align: center;
     margin: 15px auto;
-    >li {
+    li {
       display: flex;
       justify-content: stretch;
       border-top: 1px solid #E5E5E5;
