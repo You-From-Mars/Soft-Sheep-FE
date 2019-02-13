@@ -29,7 +29,7 @@ import Bus from './bus';
 export default class App extends Vue {
   private isSignin: Object = '';
   private userName: string|null = '';
-  private userId: string = '1';
+  private userId: string|null = '';
   private created() {
     this.getIsSignin();
     Bus.$on('isSignin', (value: Object) => {
@@ -42,6 +42,7 @@ export default class App extends Vue {
        email: window.localStorage.getItem('email'),
        userName: window.localStorage.getItem('userName'),
     };
+    this.userId = window.localStorage.getItem('userId');
   }
   private async exit() {
     const res = await (<any> Window).$http.post('/softsheep/loginout');

@@ -1,6 +1,5 @@
 <template>
   <div>
-    <header-title :titleContent="title"></header-title>
     <div class="page-container" id="page_home">
       <ul class="article-list">
         <li v-for="(item, index) in articleList" :key="index">

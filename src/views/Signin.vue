@@ -32,7 +32,7 @@ export default class Signin extends Vue {
             const body = res;
             window.localStorage.setItem('email', body.email);
             window.localStorage.setItem('userName', body.userName);
-            // window.localStorage.setItem('userId', body.userName);
+            window.localStorage.setItem('userId', body.userId);
             Bus.$emit('isSignin', {
                 email: body.email,
                 userName: body.userName,

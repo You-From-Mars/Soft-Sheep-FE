@@ -1,13 +1,13 @@
 <template>
-    <section class="page-container" style="border: 1px solid red;">
+    <section class="page-container">
         <section class="user-detail-top">
             <h3>{{userName}}</h3>
-            <el-button>Follow</el-button>
+            <el-button @click="follow">Follow</el-button>
         </section>
         <section class="user-detail-content">
             <el-tabs v-model="activeName">
                 <el-tab-pane label="Articles" name="articles">
-                    <article-list></article-list>
+                    <article-list :articleList="articleList"></article-list>
                 </el-tab-pane>
                 <el-tab-pane label="Followers" name="followers">
                     <follow-list :followData="followerData"></follow-list>
@@ -20,7 +20,7 @@
     </section>
 </template>
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator';
+import { Component, Vue, Watch } from 'vue-property-decorator';
 import { Tabs, TabPane } from 'element-ui';
 import articleList from '../components/ArticleList.vue';
 import FollowList from '../components/FollowList.vue';
@@ -39,9 +39,12 @@ Vue.use(TabPane);
 export default class User extends Vue {
     private activeName = 'articles';
     private userName: string = '';
+    private userId: string = '';
     private followerData: Array<FollowType> = [];
     private followingData: Array<FollowType> = [];
+    private articleList: Array<any> = [];
     private created() {
+        this.getData();
         // test
         this.followerData = [
             { userName: 'glowd', userId: '837308951f614317b4eaed6ee56f9934' },
@@ -50,14 +53,36 @@ export default class User extends Vue {
         this.followingData = [
             { userName: 'helen_12', userId: '37687c0b162d4cca9e3956275f0a9968' },
         ]
-        this.getUser();
     }
-    private getUser() {
-        const userName = window.localStorage.getItem('userName')
-        this.userName = userName ? userName : '';
+    @Watch('$route')
+    onUserChange() {
+        this.getData();
+    }
+    private getData() {
+        this.userId = this.$route.params.id;
+        this.getArticles();
+        this.getFollower();
+        this.getFollowing();
+    }
+    private async getArticles() {
+        const res = await (<any> Window).$http.get(`/softsheep/personal_articles?userId=${this.$route.params.id}`);
+        this.articleList = res;
+        this.userName = this.articleList[0].author;
+    }
+    private async getFollower() {
+        const res = await (<any> Window).$http.get('/softsheep/followers');
+        console.log('res---', res);
+    }
+    private async getFollowing() {
+        const res = await (<any> Window).$http.get('/softsheep/following');
+        console.log('getFollowing');
     }
     private toDetail(id: number) {
         this.$router.push(`/p/${id}`);
+    }
+    private async follow() {
+        const res = await (<any> Window).$http.post('/softsheep/follow', { id: this.userId, followingName: this.userName});
+        console.log('res----', res);
     }
 }
 </script>

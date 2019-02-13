@@ -1,22 +1,34 @@
 <template>
     <div class="header-title">
-        <h4>{{titleContent}}</h4>
+        <router-link :to="`/u/${author.id}`">{{author.name}}</router-link>
         <div class="bg"></div>
     </div>
 </template>
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator';
+interface Author {
+    name: String,
+    id: String,
+}
+
 @Component({
   name: 'HeaderTitle',
 })
 export default class HeaderTitle extends Vue {
-  @Prop() private titleContent!: string;
+  @Prop() private author!: {
+      type: Author,
+      default: {
+          name: '',
+          id: '',
+      },
+  };
 }
 </script>
 <style lang="less">
     .header-title {
         text-align: left;
-        > h4 {
+        > a {
+            display: block;
             width: 900px;
             margin: 0 auto;
             line-height: 30px;

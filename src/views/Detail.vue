@@ -1,6 +1,6 @@
 <template>
   <div>
-    <header-title :titleContent="articleDetailData.title"></header-title>
+    <header-title :author="{name: articleDetailData.authorName, id: articleDetailData.userUuid }"></header-title>
     <div class="page-container">
       <section class="detail-article">
         <section class="article-header">

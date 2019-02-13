@@ -18,16 +18,12 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
 
-@Component
+@Component({
+    props: {
+        articleList: Array,
+    },
+})
 export default class User extends Vue {
-    private articleList = [];
-    private created () {
-        this.getArticles();
-    }
-    private async getArticles() {
-        const res = await (<any> Window).$http.get('/softsheep/personal_articles');
-        this.articleList = res;
-    }
 }
 </script>
 <style lang="less">
