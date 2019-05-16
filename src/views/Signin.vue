@@ -6,7 +6,7 @@
                 <el-input v-model="form.email"></el-input>
             </el-form-item>
             <el-form-item label="Passord">
-                <el-input v-model="form.password"></el-input>
+                <el-input type="password" v-model="form.password"></el-input>
             </el-form-item>
             <el-button style="width: 100%;" type="primary" @click="onSubmit">Sign In</el-button>
         </el-form>
